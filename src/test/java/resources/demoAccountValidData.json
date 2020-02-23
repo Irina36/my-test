@@ -1,0 +1,32 @@
+[
+    {
+      "typeAccount": "2",
+      "currency": "3",
+      "balance": "1000"
+    },
+    {
+      "typeAccount": "3",
+      "currency": "1",
+      "balance": "2000"
+    },
+    {
+      "typeAccount": "2",
+      "currency": "2",
+      "balance": "3000"
+    },
+    {
+      "typeAccount": "3",
+      "currency": "3",
+      "balance": "4000"
+    },
+    {
+      "typeAccount": "2",
+      "currency": "1",
+      "balance": "5000"
+    },
+    {
+      "typeAccount": "3",
+      "currency": "3",
+      "balance": "6000"
+    }
+]

@@ -1,0 +1,13 @@
+[
+    {
+      "typeAccount": null,
+      "currency": null,
+      "balance": null
+    },
+    {
+      "typeAccount": null,
+      "currency": null,
+      "balance": "1000000000000"
+    }
+
+]

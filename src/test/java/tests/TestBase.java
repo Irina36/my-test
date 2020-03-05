@@ -2,8 +2,8 @@ package tests;
 
 import appmanager.ApplicationManager;
 import org.openqa.selenium.remote.BrowserType;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 import java.io.IOException;
 
@@ -11,12 +11,12 @@ public class TestBase {
 
     protected final ApplicationManager app = new ApplicationManager(System.getProperty("BROWSER", BrowserType.CHROME));
 
-    @BeforeClass
+    @BeforeSuite
     public void setUp() throws IOException {
         app.init();
     }
 
-    @AfterClass
+    @AfterSuite
     public void tearDown() {
         app.stop();
     }

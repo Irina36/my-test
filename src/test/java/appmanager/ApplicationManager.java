@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.testng.ITestContext;
 
 import java.io.File;
 import java.io.FileReader;
@@ -46,6 +47,15 @@ public class ApplicationManager {
         navigationHelper = new NavigationHelper(driver);
         sessionHelper = new SessionHelper(driver);
         sessionHelper.login(properties.getProperty("WEB_LOGIN"), properties.getProperty("WEB_PASSWORD"));
+    }
+
+    public File getFile(ITestContext nameFile) throws IOException {
+        Properties properties = new Properties();
+        String target = System.getProperty("target", "app");
+        properties.load(new FileReader(new File(String.format("src/test/java/config/%s.properties", target))));
+        String path_to_data_files = properties.getProperty("PATH_TO_DATA_FILES");
+        String testparam = nameFile.getCurrentXmlTest().getParameter("nameFile");
+        return new File(path_to_data_files + testparam);
     }
 
     public void stop() {

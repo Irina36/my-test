@@ -1,8 +1,6 @@
 package model;
 
 import com.google.gson.annotations.Expose;
-import org.hibernate.annotations.Type;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,7 +19,6 @@ public class DemoAccountData {
     private  String currency;
 
     @Column(name = "amount")
-    @Type(type = "longtext")
     private  String balance;
 
     @Column(name = "type_id")

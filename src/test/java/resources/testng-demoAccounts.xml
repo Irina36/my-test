@@ -1,12 +1,26 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1" verbose="1" >
-    <test name="DemoAccounts" >
+
+    <test name="CreateDemoAccountValid" >
+        <parameter name="nameFile" value="demoAccountValidData.json"/>
         <classes>
-            <class name="tests.TestDemoAccount" />
+            <class name="tests.TestDemoAccount">
+                <methods>
+                    <include name="createDemoAccount" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="NotCreateDemoAccountValid" >
+        <parameter name="nameFile" value="demoAccountInvalidData.json"/>
+        <classes>
+            <class name="tests.TestDemoAccount">
+                <methods>
+                    <include name="notCreateDemoAccount" />
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
-
-
 

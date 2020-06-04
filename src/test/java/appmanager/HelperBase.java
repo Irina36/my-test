@@ -20,7 +20,6 @@ public class HelperBase {
 
     public void click(By locator) {
         driver.findElement(locator).click();
-
     }
 
     public boolean isTextPresent(String text) {
@@ -31,11 +30,13 @@ public class HelperBase {
         }
     }
 
-    public void actionsMouse(By locator) {
-        WebElement submit =  driver.findElement(locator);
+    public void actionsMouse(WebElement webElement) {
         Actions actions = new Actions(driver);
-        actions.moveToElement(submit);
-        actions.click(submit).perform();
+        actions.moveToElement(webElement);
+        actions.click(webElement).perform();
     }
 
+    public Table getTable(WebElement element) {
+        return  new Table(element);
+    }
 }

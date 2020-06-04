@@ -43,5 +43,35 @@ public class TestDemoAccount extends TestBase {
         app.accountDemo().submitDemoAccount();
         Assert.assertFalse(app.accountDemo().isTextPresent("Ваш демо-счет успешно создан"));
     }
+    @Test
+    public void zeroBalance() throws InterruptedException {
+        app.goTo().gotoDemoPage();
+        app.accountDemo().zeroBalance(1,1);
+        Assert.assertTrue(app.accountDemo().isTextPresent("Баланс обнулен"));
+    }
 
+    @Test
+    public void delete() throws InterruptedException {
+        app.goTo().gotoDemoPage();
+        app.accountDemo().deleteAccount(1,1);
+        Assert.assertTrue(app.accountDemo().isTextPresent("Счет удален"));
+    }
+
+    @Test
+    public void deposit() throws InterruptedException {
+        app.goTo().gotoDemoPage();
+        app.accountDemo().deposit(1,1);
+        app.accountDemo().amount("10000");
+        app.accountDemo().submitDepositAccount();
+        Assert.assertTrue(app.accountDemo().isTextPresent("Демо-счет успешно пополнен"));
+    }
+
+    @Test
+    public void changePassword() throws InterruptedException {
+        app.goTo().gotoDemoPage();
+        app.accountDemo().changePass(1,1);
+        app.accountDemo().fillChangePass();
+        app.accountDemo().submitChangePass();
+        Assert.assertTrue(app.accountDemo().isTextPresent("Пароль успешно изменен"));
+    }
 }

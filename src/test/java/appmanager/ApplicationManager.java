@@ -39,7 +39,7 @@ public class ApplicationManager {
             driver = new InternetExplorerDriver();
         }
 
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
 
         driver.get(properties.getProperty("WEB_BASE_URL"));

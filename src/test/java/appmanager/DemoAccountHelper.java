@@ -24,10 +24,10 @@ public class DemoAccountHelper extends HelperBase {
     By depositAmount = By.xpath("//*[@id=\"demo_deposit_amount\"]");
     By submitDeposit = By.xpath("//*[@id=\"demo_deposit_submit\"]");
     By changePass = By.xpath("//*[@id=\"content\"]/table/tbody/tr[1]/td[6]/a[4]");
-    By passVois = By.xpath("//*[@id=\"demo_account_password_560_password_phone\"]");
-    By passTrade = By.xpath("//*[@id=\"demo_account_password_560_password_trader\"]");
-    By passInvestor = By.xpath("//*[@id=\"demo_account_password_560_password_investor\"]");
-    By submitChangePass = By.xpath("//*[@id=\"demo_account_password_545_submit\"]");
+    By passVois = By.xpath("//form[@class='form form-password']/div[1]/input");
+    By passTrade = By.xpath("//form[@class='form form-password']/div[2]/input");
+    By passInvestor = By.xpath("//form[@class='form form-password']/div[3]/input");
+    By submitChangePass = By.xpath("//form[@class='form form-password']/button");
 
 
     public DemoAccountHelper(WebDriver driver) {
@@ -135,6 +135,6 @@ public class DemoAccountHelper extends HelperBase {
 
     public void submitChangePass() throws InterruptedException {
         click(submitChangePass);
-        Thread.sleep(2000);
+        Thread.sleep(3000);
     }
 }

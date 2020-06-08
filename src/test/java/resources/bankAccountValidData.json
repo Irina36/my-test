@@ -1,0 +1,62 @@
+[
+  {
+    "typeBank": "ALFABANK",
+    "currency": "RUB",
+    "nameBank": "",
+    "bik": "",
+    "inn": "",
+    "kpp": "",
+    "corrAccountAlfabank": "",
+    "numberAccount": "40817810099911003414"
+  },
+  {
+    "typeBank": "OTHER_BANK",
+    "currency": "RUB",
+    "nameBank": "Русский банк",
+    "bik": "041946000",
+    "inn": "6569186931",
+    "kpp": "509745632",
+    "corrAccountOtherbank": "30101643600000000957",
+    "numberAccount": "40817810099911004415"
+  },
+  {
+    "typeBank": "ALFABANK",
+    "currency": "USD",
+    "nameBank": "",
+    "bik": "",
+    "inn": "",
+    "kpp": "",
+    "corrAccountAlfabank": "",
+    "numberAccount": "40817840099911003414"
+  },
+  {
+    "typeBank": "OTHER_BANK",
+    "currency": "USD",
+    "nameBank": "RICH-BANK",
+    "swift": "ALFARUMMXXX",
+    "corrBank": "RICH",
+    "corrSwift": "RICHXXXX",
+    "corrAccountOtherbank": "36310482",
+    "numberAccount": "40817840099911004415"
+  },
+  {
+    "typeBank": "ALFABANK",
+    "currency": "EUR",
+    "nameBank": "",
+    "bik": "",
+    "inn": "",
+    "kpp": "",
+    "corrAccountAlfabank": "",
+    "numberAccount": "40817978099911007414"
+  },
+  {
+    "typeBank": "OTHER_BANK",
+    "currency": "EUR",
+    "nameBank": "RICH-BANK",
+    "swift": "ALFARUMMXXX",
+    "corrBank": "RICH",
+    "corrSwift": "RICHXXXX",
+    "corrAccountOtherbank": "36310492",
+    "numberAccount": "40817978099911004415"
+  }
+]

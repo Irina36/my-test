@@ -19,7 +19,7 @@ public class TestDemoAccount extends TestBase {
     ObjectMapper mapper = new ObjectMapper();
 
     @DataProvider(name = "data")
-    public Iterator<Object[]> testdata(ITestContext nameFile) throws IOException {
+    public Iterator<Object[]> testData(ITestContext nameFile) throws IOException {
         File file = app.getFile(nameFile);
         List<DemoAccountData> myObjects = mapper.readValue(file, new TypeReference<List<DemoAccountData>>() {});
         Iterator<Object[]> iterator = myObjects.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
@@ -28,7 +28,7 @@ public class TestDemoAccount extends TestBase {
 
     @Test(dataProvider = "data")
     public void createDemoAccount(DemoAccountData demo) throws InterruptedException {
-        app.goTo().gotoDemoPage();
+        app.goTo().demoPage();
         app.accountDemo().createDemoAccount();
         app.accountDemo().fillDemoAccount(demo);
         app.accountDemo().submitDemoAccount();
@@ -37,7 +37,7 @@ public class TestDemoAccount extends TestBase {
 
     @Test(dataProvider = "data")
     public void notCreateDemoAccount(DemoAccountData demo) throws InterruptedException {
-        app.goTo().gotoDemoPage();
+        app.goTo().demoPage();
         app.accountDemo().createDemoAccount();
         app.accountDemo().fillDemoAccount(demo);
         app.accountDemo().submitDemoAccount();
@@ -45,21 +45,21 @@ public class TestDemoAccount extends TestBase {
     }
     @Test
     public void zeroBalance() throws InterruptedException {
-        app.goTo().gotoDemoPage();
+        app.goTo().demoPage();
         app.accountDemo().zeroBalance(1,1);
         Assert.assertTrue(app.accountDemo().isTextPresent("Баланс обнулен"));
     }
 
     @Test
     public void delete() throws InterruptedException {
-        app.goTo().gotoDemoPage();
+        app.goTo().demoPage();
         app.accountDemo().deleteAccount(1,1);
         Assert.assertTrue(app.accountDemo().isTextPresent("Счет удален"));
     }
 
     @Test
     public void deposit() throws InterruptedException {
-        app.goTo().gotoDemoPage();
+        app.goTo().demoPage();
         app.accountDemo().deposit(1,1);
         app.accountDemo().amount("10000");
         app.accountDemo().submitDepositAccount();
@@ -68,7 +68,7 @@ public class TestDemoAccount extends TestBase {
 
     @Test
     public void changePassword() throws InterruptedException {
-        app.goTo().gotoDemoPage();
+        app.goTo().demoPage();
         app.accountDemo().changePass(1,1);
         app.accountDemo().fillChangePass();
         app.accountDemo().submitChangePass();

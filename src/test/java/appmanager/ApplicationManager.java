@@ -19,12 +19,12 @@ public class ApplicationManager {
     public NavigationHelper navigationHelper;
     public DemoAccountHelper demoAccountHelper;
     public SessionHelper sessionHelper;
+    private BankDetailHelper bankDetailHelper;
     private String browser;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
         properties = new Properties();
-
     }
 
     public void init() throws IOException {
@@ -41,11 +41,12 @@ public class ApplicationManager {
 
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-
         driver.get(properties.getProperty("WEB_BASE_URL"));
+
         demoAccountHelper = new DemoAccountHelper(driver);
         navigationHelper = new NavigationHelper(driver);
         sessionHelper = new SessionHelper(driver);
+        bankDetailHelper = new BankDetailHelper(driver);
         sessionHelper.login(properties.getProperty("WEB_LOGIN"), properties.getProperty("WEB_PASSWORD"));
     }
 
@@ -69,7 +70,9 @@ public class ApplicationManager {
     public NavigationHelper goTo() {
         return navigationHelper;
     }
-
+    public BankDetailHelper accountBank() {
+        return bankDetailHelper;
+    }
     public SessionHelper session() {
         return sessionHelper;
     }

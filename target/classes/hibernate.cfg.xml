@@ -35,7 +35,8 @@
         <property name="hbm2ddl.auto">validate</property>
 
         <!-- Names the annotated entity class -->
-        <mapping class="model.DemoAccountData"/>
+        <mapping class="model.DemoAccount"/>
+        <mapping class="model.BankAccount"/>
 
     </session-factory>
 

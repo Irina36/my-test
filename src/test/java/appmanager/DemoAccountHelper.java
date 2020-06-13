@@ -1,9 +1,12 @@
 package appmanager;
 
-import model.DemoAccountData;
+import model.Objects;
+import model.DemoAccount;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import java.util.List;
+
 
 public class DemoAccountHelper extends HelperBase {
 
@@ -38,9 +41,9 @@ public class DemoAccountHelper extends HelperBase {
         click(create);
     }
 
-    public void fillDemoAccount(DemoAccountData demoAccountData) throws InterruptedException {
+    public void fillDemoAccount(DemoAccount demoAccountData) throws InterruptedException {
 
-        if (demoAccountData.getTypeAccount() == null & demoAccountData.getCurrency() == null & demoAccountData.getBalance() == null) {
+        if (demoAccountData.getTypeAccount() == null & demoAccountData.getCurrency() == null & demoAccountData.getAmount() == null) {
             return;
 
         } else {
@@ -51,10 +54,10 @@ public class DemoAccountHelper extends HelperBase {
                 click(typeAccount);
 
                 switch (demoAccountData.getTypeAccount()) {
-                    case "2":
+                    case 2:
                         click(hedging);
                         break;
-                    case "3":
+                    case 3:
                         click(netting);
                         break;
                 }
@@ -66,22 +69,21 @@ public class DemoAccountHelper extends HelperBase {
                 click(currency);
 
                 switch (demoAccountData.getCurrency()) {
-                    case "3":
+                    case 3:
                         click(rub);
                         break;
-                    case "1":
+                    case 1:
                         click(usd);
                         break;
-                    case "2":
+                    case 2:
                         click(eur);
                         break;
                     default:
                         break;
                 }
             }
-            if (demoAccountData.getBalance() == null) {
-            } else {
-                typeText(balance, demoAccountData.getBalance());
+            if (demoAccountData.getAmount() != null) {
+                typeText(balance, String.valueOf(demoAccountData.getAmount()));
             }
         }
     }
@@ -90,28 +92,18 @@ public class DemoAccountHelper extends HelperBase {
         click(submitCreate);
     }
 
-    public void selectValue(int rowNumber, int columnNumber, By locator) throws InterruptedException {
-        Table t = getTable(driver.findElement(table));
-        WebElement valueFromCell = t.getValueFromCell(rowNumber, columnNumber);
-        actionsMouse(valueFromCell);
-//        WebDriverWait myWaitVar = new WebDriverWait(driver, 7);
-//        myWaitVar.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        WebElement zero = valueFromCell.findElement(locator);
-        zero.click();
-    }
-
     public void zeroBalance(int rowNumber, int columnNumber) throws InterruptedException {
-        selectValue(rowNumber, columnNumber, zero);
+        selectValue(table, rowNumber, columnNumber, zero);
         Thread.sleep(2000);
     }
 
     public void deleteAccount(int rowNumber, int columnNumber) throws InterruptedException {
-        selectValue(rowNumber, columnNumber, delete);
+        selectValue(table, rowNumber, columnNumber, delete);
         Thread.sleep(2000);
     }
 
     public void deposit(int rowNumber, int columnNumber) throws InterruptedException {
-        selectValue(rowNumber, columnNumber, deposit);
+        selectValue(table, rowNumber, columnNumber, deposit);
     }
 
     public void amount(String amount) {
@@ -123,7 +115,7 @@ public class DemoAccountHelper extends HelperBase {
     }
 
     public void changePass(int rowNumber, int columnNumber) throws InterruptedException {
-        selectValue(rowNumber, columnNumber, changePass);
+        selectValue(table, rowNumber, columnNumber, changePass);
         Thread.sleep(2000);
     }
 
@@ -137,4 +129,17 @@ public class DemoAccountHelper extends HelperBase {
         click(submitChangePass);
         Thread.sleep(3000);
     }
+
+    public Objects all() {
+        Objects demoObjects = new Objects();
+        WebElement t = driver.findElement(table);
+        List<WebElement> rows = t.findElements(By.xpath("./tr[@data-key]"));
+        for (WebElement row : rows) {
+            int id = Integer.parseInt(row.getAttribute("data-key"));
+            demoObjects.add(new DemoAccount().setId(id));
+        }
+        return demoObjects;
+    }
+
+
 }

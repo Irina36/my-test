@@ -2,11 +2,11 @@
   {
     "typeAccount": null,
     "currency": null,
-    "balance": "1000000000000"
+    "amount": "1000000000000"
   },
   {
     "typeAccount": null,
     "currency": null,
-    "balance": null
+    "amount": null
   }
 ]

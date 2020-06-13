@@ -6,7 +6,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.testng.ITestContext;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,21 +14,28 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
     public WebDriver driver;
-    private final Properties properties;
+    public final Properties properties;
     public NavigationHelper navigationHelper;
     public DemoAccountHelper demoAccountHelper;
     public SessionHelper sessionHelper;
-    private BankDetailHelper bankDetailHelper;
+    private BankAccountHelper bankDetailHelper;
     private String browser;
+    private DbHelper dbHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
         properties = new Properties();
+    }   
+    
+    public void properties() throws IOException {
+        String target = System.getProperty("target", "app");
+        properties.load(new FileReader(new File(String.format("src/test/java/config/%s.properties", target))));
     }
 
     public void init() throws IOException {
-        String target = System.getProperty("target", "app");
-        properties.load(new FileReader(new File(String.format("src/test/java/config/%s.properties", target))));
+        properties();
+        
+        dbHelper =new DbHelper();
 
         if (browser.equals(BrowserType.CHROME)) {
             driver = new ChromeDriver();
@@ -46,17 +52,15 @@ public class ApplicationManager {
         demoAccountHelper = new DemoAccountHelper(driver);
         navigationHelper = new NavigationHelper(driver);
         sessionHelper = new SessionHelper(driver);
-        bankDetailHelper = new BankDetailHelper(driver);
+        bankDetailHelper = new BankAccountHelper(driver);
         sessionHelper.login(properties.getProperty("WEB_LOGIN"), properties.getProperty("WEB_PASSWORD"));
     }
 
     public File getFile(ITestContext nameFile) throws IOException {
-        Properties properties = new Properties();
-        String target = System.getProperty("target", "app");
-        properties.load(new FileReader(new File(String.format("src/test/java/config/%s.properties", target))));
+        properties();
         String path_to_data_files = properties.getProperty("PATH_TO_DATA_FILES");
-        String testparam = nameFile.getCurrentXmlTest().getParameter("nameFile");
-        return new File(path_to_data_files + testparam);
+        String name = nameFile.getCurrentXmlTest().getParameter("nameFile");
+        return new File(path_to_data_files + name);
     }
 
     public void stop() {
@@ -70,10 +74,11 @@ public class ApplicationManager {
     public NavigationHelper goTo() {
         return navigationHelper;
     }
-    public BankDetailHelper accountBank() {
+    public BankAccountHelper accountBank() {
         return bankDetailHelper;
     }
     public SessionHelper session() {
         return sessionHelper;
     }
+    public DbHelper db() { return dbHelper; }
 }

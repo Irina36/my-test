@@ -17,7 +17,6 @@ public class Table {
         List<WebElement> rows = tableElement.findElements(By.xpath(".//tr"));
         return rows;
     }
-
     public List<List<WebElement>> getRowsWithColumns() {
         List<WebElement> rows = getRows();
         List<List<WebElement>> rowsWithColumns = new ArrayList<>();

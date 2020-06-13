@@ -1,62 +1,62 @@
 [
   {
-    "typeBank": "ALFABANK",
-    "currency": "RUB",
-    "nameBank": "",
+    "typeBank": 1,
+    "currency": 3,
+    "bankName": "",
     "bik": "",
     "inn": "",
     "kpp": "",
-    "corrAccountAlfabank": "",
-    "numberAccount": "40817810099911003414"
+    "accountCorresp": "",
+    "numberAccount": "40817810091311007424"
   },
   {
-    "typeBank": "OTHER_BANK",
-    "currency": "RUB",
-    "nameBank": "Русский банк",
+    "typeBank": 0,
+    "currency": 3,
+    "bankName": "Русский банк",
     "bik": "041946000",
     "inn": "6569186931",
     "kpp": "509745632",
-    "corrAccountOtherbank": "30101643600000000957",
-    "numberAccount": "40817810099911004415"
+    "accountCorresp": "40817810099911004435",
+    "numberAccount": "40817810092211004435"
   },
   {
-    "typeBank": "ALFABANK",
-    "currency": "USD",
-    "nameBank": "",
-    "bik": "",
-    "inn": "",
-    "kpp": "",
-    "corrAccountAlfabank": "",
-    "numberAccount": "40817840099911003414"
+    "typeBank": 1,
+    "currency": 1,
+    "bankName": "",
+    "swift": "",
+    "corrBank": "",
+    "corrSwift": "",
+    "accountCorresp": "",
+    "numberAccount": "40817840096311004455"
   },
   {
-    "typeBank": "OTHER_BANK",
-    "currency": "USD",
-    "nameBank": "RICH-BANK",
+    "typeBank": 0,
+    "currency": 1,
+    "bankName": "RICH-BANK",
     "swift": "ALFARUMMXXX",
     "corrBank": "RICH",
     "corrSwift": "RICHXXXX",
-    "corrAccountOtherbank": "36310482",
-    "numberAccount": "40817840099911004415"
+    "accountCorresp": "36310482",
+    "numberAccount": "40817840094911004455"
   },
   {
-    "typeBank": "ALFABANK",
-    "currency": "EUR",
-    "nameBank": "",
+    "typeBank": 1,
+    "currency": 2,
+    "bankName": "",
     "bik": "",
     "inn": "",
     "kpp": "",
-    "corrAccountAlfabank": "",
-    "numberAccount": "40817978099911007414"
+    "accountCorresp": "",
+    "numberAccount": "40817978094591008464"
   },
   {
-    "typeBank": "OTHER_BANK",
-    "currency": "EUR",
-    "nameBank": "RICH-BANK",
+    "typeBank": 0,
+    "currency": 2,
+    "bankName": "RICH-BANK",
     "swift": "ALFARUMMXXX",
     "corrBank": "RICH",
     "corrSwift": "RICHXXXX",
-    "corrAccountOtherbank": "36310492",
-    "numberAccount": "40817978099911004415"
+    "accountCorresp": "36310482",
+    "numberAccount": "40817978096778004475"
   }
 ]

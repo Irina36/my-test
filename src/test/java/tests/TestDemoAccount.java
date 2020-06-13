@@ -2,7 +2,8 @@ package tests;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.DemoAccountData;
+import model.Objects;
+import model.DemoAccount;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.DataProvider;
@@ -21,43 +22,57 @@ public class TestDemoAccount extends TestBase {
     @DataProvider(name = "data")
     public Iterator<Object[]> testData(ITestContext nameFile) throws IOException {
         File file = app.getFile(nameFile);
-        List<DemoAccountData> myObjects = mapper.readValue(file, new TypeReference<List<DemoAccountData>>() {});
+        List<DemoAccount> myObjects = mapper.readValue(file, new TypeReference<List<DemoAccount>>() {});
         Iterator<Object[]> iterator = myObjects.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
         return iterator;
     }
 
-    @Test(dataProvider = "data")
-    public void createDemoAccount(DemoAccountData demo) throws InterruptedException {
+    @Test (dataProvider = "data")
+    public void createDemoAccount(DemoAccount demo) throws InterruptedException{
         app.goTo().demoPage();
+        String customer = app.properties.getProperty("WEB_LOGIN");
+        Objects<DemoAccount> before = app.db().demoAccount(customer);
         app.accountDemo().createDemoAccount();
         app.accountDemo().fillDemoAccount(demo);
         app.accountDemo().submitDemoAccount();
         Assert.assertTrue(app.accountDemo().isTextPresent("Ваш демо-счет успешно создан"));
+        Objects<DemoAccount> after = app.db().demoAccount(customer);
+        Assert.assertEquals(after.size(),before.size() + 1);
+        Assert.assertEquals(after, before.withAdded(demo.setId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt())));
+/*                .setTypeAccount(after.stream().map( (g) -> g.getTypeAccount()).iterator().next())
+                .setAmount(after.stream().map((g) -> g.getAmount()).iterator().next())
+                .setCurrency(after.stream().map((g) -> g.getCurrency()).iterator().next())));*/
     }
 
-    @Test(dataProvider = "data")
-    public void notCreateDemoAccount(DemoAccountData demo) throws InterruptedException {
+    @Test(dataProvider = "data", dependsOnMethods = "createDemoAccount")
+    public void notCreateDemoAccount(DemoAccount demo) throws InterruptedException {
         app.goTo().demoPage();
+        String customer = app.properties.getProperty("WEB_LOGIN");
+        Objects before = app.db().demoAccount(customer);
         app.accountDemo().createDemoAccount();
         app.accountDemo().fillDemoAccount(demo);
         app.accountDemo().submitDemoAccount();
         Assert.assertFalse(app.accountDemo().isTextPresent("Ваш демо-счет успешно создан"));
+        app.goTo().demoPage();
+        Objects after = app.db().demoAccount(customer);
+        Assert.assertEquals(after.size(),before.size());
+        Assert.assertEquals(after,before);
     }
-    @Test
+    @Test( dependsOnMethods = "createDemoAccount")
     public void zeroBalance() throws InterruptedException {
         app.goTo().demoPage();
         app.accountDemo().zeroBalance(1,1);
         Assert.assertTrue(app.accountDemo().isTextPresent("Баланс обнулен"));
     }
 
-    @Test
+    @Test( dependsOnMethods = "createDemoAccount")
     public void delete() throws InterruptedException {
         app.goTo().demoPage();
         app.accountDemo().deleteAccount(1,1);
         Assert.assertTrue(app.accountDemo().isTextPresent("Счет удален"));
     }
 
-    @Test
+    @Test( dependsOnMethods = "createDemoAccount")
     public void deposit() throws InterruptedException {
         app.goTo().demoPage();
         app.accountDemo().deposit(1,1);
@@ -66,7 +81,7 @@ public class TestDemoAccount extends TestBase {
         Assert.assertTrue(app.accountDemo().isTextPresent("Демо-счет успешно пополнен"));
     }
 
-    @Test
+    @Test( dependsOnMethods = "createDemoAccount")
     public void changePassword() throws InterruptedException {
         app.goTo().demoPage();
         app.accountDemo().changePass(1,1);

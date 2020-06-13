@@ -1,11 +1,11 @@
 package appmanager;
 
-import model.BankAccountData;
+import model.BankAccount;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class BankDetailHelper extends HelperBase {
-    public BankDetailHelper(WebDriver driver) {
+public class BankAccountHelper extends HelperBase {
+    public BankAccountHelper(WebDriver driver) {
         super(driver);
     }
     By linkRub = By.xpath("//*[@id=\"content\"]/div[2]/a[1]");
@@ -19,56 +19,52 @@ public class BankDetailHelper extends HelperBase {
     By bik =By.xpath("//*[@id=\"bank_bik\"]");
     By inn =By.xpath("//*[@id=\"bank_tax_number\"]");
     By kpp =By.xpath("//*[@id=\"bank_kpp\"]");
-    By corrAccountAlfabank = By.xpath("//*[@id=\"bank_bill\"]");
+    By accountCorresp = By.xpath("//div[@class='form-column']/div/div[4]/input");
     By swift = By.xpath("//*[@id=\"bank_swift\"]");
     By correspondentBank = By.xpath("//*[@id=\"bank_correspondent\"]");
     By getCorrespondentSwift = By.xpath("//*[@id=\"bank_correspondent_swift\"]");
-    By corrAccountOtherbank = By.xpath("//*[@id=\"bank_correspondent_account\"]");
 
-    public void createBank(String currency) {
+    public void createBank(int currency) {
         switch (currency) {
-            case ("RUB"):
+            case (3):
                 click(linkRub);
                 break;
-            case ("USD"):
+            case (1):
                 click(linkUsd);
                 break;
-            case ("EUR"):
+            case (2):
                 click(linkEur);
                 break;
         }
     }
 
-    public void selectBank(String typeBank) {
-        switch (typeBank) {
-            case ("ALFABANK"):
-                click(alfaBank);
-                break;
-            case ("OTHER_BANK"):
-                click(otherBank);
-                break;
-            }
+    public void selectBank(boolean typeBank) {
+
+        if (typeBank) {
+            click(alfaBank);
+        } else
+            click(otherBank);
         }
 
-    public void fillBankAccount(BankAccountData bankAccountData) {
+    public void fillBankAccount(BankAccount bankAccountData) {
 
-        if (bankAccountData.getTypeBank().equals("ALFABANK")) {
+        if (bankAccountData.getTypeBank() == true) {
             typeText(numberAccount,bankAccountData.getNumberAccount());
         }
-        if (bankAccountData.getTypeBank().equals("OTHER_BANK") && bankAccountData.getCurrency().equals("RUB")){
-            typeText(name, bankAccountData.getNameBank());
+        if (bankAccountData.getTypeBank() == false && bankAccountData.getCurrency() == 3){
+            typeText(name, bankAccountData.getBankName());
             typeText(bik, bankAccountData.getBik());
             typeText(inn, bankAccountData.getInn());
             typeText(kpp, bankAccountData.getKpp());
-            typeText(corrAccountAlfabank,bankAccountData.getCorrAccountOtherbank());
+            typeText(accountCorresp,bankAccountData.getAccountCorresp());
             typeText(numberAccount,bankAccountData.getNumberAccount());
-
-        } else if (bankAccountData.getTypeBank().equals("OTHER_BANK")){
-            typeText(name, bankAccountData.getNameBank());
+        }
+        else if (bankAccountData.getTypeBank() == false){
+            typeText(name, bankAccountData.getBankName());
             typeText(swift, bankAccountData.getSwift());
             typeText(correspondentBank, bankAccountData.getCorrBank());
             typeText(getCorrespondentSwift, bankAccountData.getCorrSwift());
-            typeText(corrAccountOtherbank, bankAccountData.getCorrAccountOtherbank());
+            typeText(accountCorresp, bankAccountData.getAccountCorresp());
             typeText(numberAccount,bankAccountData.getNumberAccount());
         }
     }

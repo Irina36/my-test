@@ -13,6 +13,7 @@ public class TestBase {
 
     @BeforeSuite
     public void setUp() throws IOException {
+        app.properties();
         app.init();
     }
 

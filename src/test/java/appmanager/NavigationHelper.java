@@ -9,8 +9,16 @@ public class NavigationHelper extends HelperBase {
         super(driver);
     }
 
-    public void gotoDemoPage() throws InterruptedException {
+    By demo = By.xpath("//*[@id=\"sidebar\"]/div/ul/li[3]/a");
+    By bankDetail = By.xpath("//*[@id=\"sidebar\"]/div/ul/li[4]/a");
+
+    public void demoPage() throws InterruptedException {
         Thread.sleep(2000);
-        click(By.xpath("//*[@id=\"sidebar\"]/div/ul/li[3]/a"));
+        click(demo);
+
+    }
+    public void bankDetail() throws InterruptedException {
+        Thread.sleep(2000);
+        click(bankDetail);
     }
 }

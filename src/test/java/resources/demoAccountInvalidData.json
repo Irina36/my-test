@@ -1,13 +1,12 @@
 [
-    {
-      "typeAccount": null,
-      "currency": null,
-      "balance": null
-    },
-    {
-      "typeAccount": null,
-      "currency": null,
-      "balance": "1000000000000"
-    }
-
+  {
+    "typeAccount": null,
+    "currency": null,
+    "amount": "1000000000000"
+  },
+  {
+    "typeAccount": null,
+    "currency": null,
+    "amount": null
+  }
 ]

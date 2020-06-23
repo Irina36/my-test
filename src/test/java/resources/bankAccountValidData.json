@@ -1,0 +1,62 @@
+[
+  {
+    "typeBank": 1,
+    "currency": 3,
+    "bankName": "",
+    "bik": "",
+    "inn": "",
+    "kpp": "",
+    "accountCorresp": "",
+    "numberAccount": "40817810091311007424"
+  },
+  {
+    "typeBank": 0,
+    "currency": 3,
+    "bankName": "Русский банк",
+    "bik": "041946000",
+    "inn": "6569186931",
+    "kpp": "509745632",
+    "accountCorresp": "40817810099911004435",
+    "numberAccount": "40817810092211004435"
+  },
+  {
+    "typeBank": 1,
+    "currency": 1,
+    "bankName": "",
+    "swift": "",
+    "corrBank": "",
+    "corrSwift": "",
+    "accountCorresp": "",
+    "numberAccount": "40817840096311004455"
+  },
+  {
+    "typeBank": 0,
+    "currency": 1,
+    "bankName": "RICH-BANK",
+    "swift": "ALFARUMMXXX",
+    "corrBank": "RICH",
+    "corrSwift": "RICHXXXX",
+    "accountCorresp": "36310482",
+    "numberAccount": "40817840094911004455"
+  },
+  {
+    "typeBank": 1,
+    "currency": 2,
+    "bankName": "",
+    "bik": "",
+    "inn": "",
+    "kpp": "",
+    "accountCorresp": "",
+    "numberAccount": "40817978094591008464"
+  },
+  {
+    "typeBank": 0,
+    "currency": 2,
+    "bankName": "RICH-BANK",
+    "swift": "ALFARUMMXXX",
+    "corrBank": "RICH",
+    "corrSwift": "RICHXXXX",
+    "accountCorresp": "36310482",
+    "numberAccount": "40817978096778004475"
+  }
+]

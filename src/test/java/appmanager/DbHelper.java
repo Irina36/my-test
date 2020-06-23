@@ -11,6 +11,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import java.util.List;
 
+
 public class DbHelper {
 
     private final SessionFactory sessionFactory;

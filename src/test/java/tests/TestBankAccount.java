@@ -3,7 +3,6 @@ package tests;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.BankAccount;
-import model.DemoAccount;
 import model.Objects;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -18,6 +17,7 @@ import java.util.stream.Collectors;
 public class TestBankAccount extends TestBase {
 
     ObjectMapper mapper = new ObjectMapper();
+    String customer = app.properties.getProperty("WEB_LOGIN");
 
     @DataProvider(name = "data")
     public Iterator<Object[]> testData(ITestContext nameFile) throws IOException {
@@ -30,7 +30,6 @@ public class TestBankAccount extends TestBase {
     @Test (dataProvider = "data")
     public void createBankAccount(BankAccount bank) throws InterruptedException {
         app.goTo().bankDetail();
-        String customer = app.properties.getProperty("WEB_LOGIN");
         Objects<BankAccount> before = app.db().bankAccount(customer);
         app.accountBank().createBank(bank.getCurrency());
         app.accountBank().selectBank(bank.getTypeBank());

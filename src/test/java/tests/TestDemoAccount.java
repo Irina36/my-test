@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class TestDemoAccount extends TestBase {
 
     ObjectMapper mapper = new ObjectMapper();
+    String customer = app.properties.getProperty("WEB_LOGIN");
 
     @DataProvider(name = "data")
     public Iterator<Object[]> testData(ITestContext nameFile) throws IOException {
@@ -28,9 +29,8 @@ public class TestDemoAccount extends TestBase {
     }
 
     @Test (dataProvider = "data")
-    public void createDemoAccount(DemoAccount demo) throws InterruptedException{
+    public void createDemoAccount(DemoAccount demo) throws InterruptedException {
         app.goTo().demoPage();
-        String customer = app.properties.getProperty("WEB_LOGIN");
         Objects<DemoAccount> before = app.db().demoAccount(customer);
         app.accountDemo().createDemoAccount();
         app.accountDemo().fillDemoAccount(demo);
@@ -43,36 +43,41 @@ public class TestDemoAccount extends TestBase {
                 .setAmount(after.stream().map((g) -> g.getAmount()).iterator().next())
                 .setCurrency(after.stream().map((g) -> g.getCurrency()).iterator().next())));*/
     }
+    @Test (dataProvider = "data")
+    public void notCreateDemoAccount(DemoAccount demo) throws InterruptedException, IOException {
 
-    @Test(dataProvider = "data", dependsOnMethods = "createDemoAccount")
-    public void notCreateDemoAccount(DemoAccount demo) throws InterruptedException {
         app.goTo().demoPage();
-        String customer = app.properties.getProperty("WEB_LOGIN");
-        Objects before = app.db().demoAccount(customer);
+        Objects<DemoAccount> before = app.db().demoAccount(customer);
         app.accountDemo().createDemoAccount();
         app.accountDemo().fillDemoAccount(demo);
         app.accountDemo().submitDemoAccount();
         Assert.assertFalse(app.accountDemo().isTextPresent("Ваш демо-счет успешно создан"));
         app.goTo().demoPage();
-        Objects after = app.db().demoAccount(customer);
+        Objects<DemoAccount> after = app.db().demoAccount(customer);
         Assert.assertEquals(after.size(),before.size());
         Assert.assertEquals(after,before);
     }
-    @Test( dependsOnMethods = "createDemoAccount")
+    @Test
     public void zeroBalance() throws InterruptedException {
         app.goTo().demoPage();
+        Objects<DemoAccount> before = app.db().demoAccount(customer);
         app.accountDemo().zeroBalance(1,1);
         Assert.assertTrue(app.accountDemo().isTextPresent("Баланс обнулен"));
+        Objects<DemoAccount> after = app.db().demoAccount(customer);
+
     }
 
-    @Test( dependsOnMethods = "createDemoAccount")
+    @Test
     public void delete() throws InterruptedException {
         app.goTo().demoPage();
+        Objects before = app.db().demoAccount(customer);
         app.accountDemo().deleteAccount(1,1);
         Assert.assertTrue(app.accountDemo().isTextPresent("Счет удален"));
+        Objects after = app.db().demoAccount(customer);
+        Assert.assertEquals(after.size(),before.size() - 1);
     }
 
-    @Test( dependsOnMethods = "createDemoAccount")
+    @Test
     public void deposit() throws InterruptedException {
         app.goTo().demoPage();
         app.accountDemo().deposit(1,1);
@@ -81,7 +86,7 @@ public class TestDemoAccount extends TestBase {
         Assert.assertTrue(app.accountDemo().isTextPresent("Демо-счет успешно пополнен"));
     }
 
-    @Test( dependsOnMethods = "createDemoAccount")
+    @Test
     public void changePassword() throws InterruptedException {
         app.goTo().demoPage();
         app.accountDemo().changePass(1,1);

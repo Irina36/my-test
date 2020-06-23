@@ -25,7 +25,7 @@ public class ApplicationManager {
     public ApplicationManager(String browser) {
         this.browser = browser;
         properties = new Properties();
-    }   
+    }
     
     public void properties() throws IOException {
         String target = System.getProperty("target", "app");
@@ -33,7 +33,8 @@ public class ApplicationManager {
     }
 
     public void init() throws IOException {
-        properties();
+        String target = System.getProperty("target", "app");
+        properties.load(new FileReader(new File(String.format("src/test/java/config/%s.properties", target))));
         
         dbHelper =new DbHelper();
 
@@ -57,7 +58,8 @@ public class ApplicationManager {
     }
 
     public File getFile(ITestContext nameFile) throws IOException {
-        properties();
+        String target = System.getProperty("target", "app");
+        properties.load(new FileReader(new File(String.format("src/test/java/config/%s.properties", target))));
         String path_to_data_files = properties.getProperty("PATH_TO_DATA_FILES");
         String name = nameFile.getCurrentXmlTest().getParameter("nameFile");
         return new File(path_to_data_files + name);
